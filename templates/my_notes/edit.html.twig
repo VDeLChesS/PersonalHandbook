@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit MyNotes{% endblock %}
+
+{% block stylesheets %}
+    
+    <link rel="stylesheet" href="{{ asset('styles/mynotes.css') }}">
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-start align-content-center">
+    <a href="{{ path('my_notes_index') }}" style="margin: 5px 0 0 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-caret-left-square-fill" viewBox="0 0 16 16">
+        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm10.5 10V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4A.5.5 0 0 0 10.5 12"/></svg>
+    </a>
+</div>
+<main class="h-100 flex-shrink-0">
+    <h1 class="text-center fw-bold">Edit Your Note</h1>
+    <div class="container-fluid">
+        <div class="row g-3">
+            <div class="col-md-7">    
+                {{ include('my_notes/_form.html.twig', {'button_label': 'Update'})  }}
+            </div>
+            <div class="col-md-4">
+               <img src="{{ asset('pictures/' ~ my_note.picture ) }}"  class="img-fluid" alt="Edit Note">
+            </div>	
+        </div>
+    </div>
+</main>
+<br><br>
+
+    
+
+    
+{% endblock %}

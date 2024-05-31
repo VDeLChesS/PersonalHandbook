@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserAccessController!{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('styles/user_access.css') }}" rel="stylesheet">
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block navbar %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+<div class="position-relative overflow-hidden p-3 p-md-7 m-md-3 text-center">
+    <div class="container-fluid px-6 py-7" id="featured-3">
+        <h2 class="pb-2 border-bottom">Welcome {{ app.user.fname }} {{ app.user.lname }}</h2>
+        <p class="lead my-4">This is your personal dashboard. Here you can access all the tools you need to organize your life and manage your time more effectively.</p>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+            <div class="feature col">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
+                </div>
+                <h3 class="fs-2">My Calendar</h3>
+                <p>Here you will find your own User Calendar with an overview of all your upcoming tasks/appointments.</p>
+                <a href="{{ path('app_user_calendar')}}" class="icon-link d-inline-flex align-items-center">
+                    Go to My Calendar
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+                </a>
+            </div>
+            <div class="feature col">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"/></svg>
+                </div>
+                <h3 class="fs-2">My Profile</h3>
+                <p>Check out your User Profile section. Feel free to customize it, if you want.</p>
+                <a href="{{ path('app_user_profile') }}" class="icon-link d-inline-flex align-items-center">
+                    Go to My Profile
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+                </a>
+            </div>
+            <div class="feature col">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
+                </div>
+                <h3 class="fs-2">User Address</h3>
+                <p>Here you can complete your User Registration by adding your Personal Address.</p>
+                <a href="{{ path('app_addresses_index')}}" class="icon-link d-inline-flex align-items-center">
+                    Go to My Address
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+            <div class="feature col">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"/></svg>
+                </div>
+                <h3 class="fs-2">My Notes</h3>
+                <p>Your digital Tool designed to help you create, organize, and manage your notes efficiently by categorizing them into folders or tags including search functionality to easily find specific notes</p>
+                <a href="{{ path('my_notes_index')}}" class="icon-link d-inline-flex align-items-center">
+                    Go to My Notes
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+                </a>
+            </div>
+            <div class="feature col">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#grid"/></svg>
+                </div>
+                <h3 class="fs-2">My Tasks</h3>
+                <p>Another digital Tool designed to help you organize, track, and manage your tasks and to-do lists. It allows you to create tasks, set deadlines, and prioritize them based on urgency or importance. </p>
+                <a href="{{ path('tasks_index') }}" class="icon-link d-inline-flex align-items-center">
+                    Go to My Tasks
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+                </a>
+            </div>
+            <div class="feature col">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#table"/></svg>
+                </div>
+                <h3 class="fs-2">My Appointments</h3>
+                <p>This Last Tool is a digital Tool designed to help you schedule, track, and manage your appointments. Reduce the likelihood of missed appointments, and manage your time more effectively.</p>
+                <a href="{{ path('appointments_index')}}" class="icon-link d-inline-flex align-items-center">
+                    Go to My Appointments
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div data-controller="hello">
+        <div data-hello-target="{{ app.user.fname }}"></div>
+        <div data-hello-target="{{ app.user.lname }}"></div>
+
+        <h1>Hello <span data-hello-target="output"></span></h1>
+
+        <input data-hello-target="name" type="text">
+        
+        <button data-action="click->hello#greet">Greet</button>
+        <button data-action="click->hello#reset">Reset</button>
+        <span data-hello-target="output"></span>
+    </div>
+    <div class="container-fluid px-4 py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">Suggested Tasks</h2>
+
+        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+        {% for suggestedTask in suggestedTasks %}
+            <div class="col">
+                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('{{ suggestedTask.picture }}');">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                        <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{ suggestedTask.title }}</h3>
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="d-flex align-items-center me-3">
+                                <a href="{{ path('suggested_tasks_show', {'id': suggestedTask.id}) }}">
+                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#zoom-in"/></svg>
+                                    
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href="{{ path('suggested_tasks_delete', {'id': suggestedTask.id}) }}">
+                                    <svg class="bi me-2" width="2em" height="1em"><use xlink:href="#trash-3"/></svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %} 
+    {{ parent()}}
+{% endblock %}
+
+

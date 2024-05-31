@@ -1,0 +1,55 @@
+{% macro alert(options) %}
+    {% import '@Tabler/includes/utils.html.twig' as utils %}
+
+    {# Content #}
+    {% set _title = options.title ?? null %}
+    {% set _description = options.description ?? null %}
+    {% set _icon = options.icon ?? null %}
+
+    {# Configuration #}
+    {% set _type = options.type ?? 'danger' %}
+    {% set _dismissible = (options.dismissible ?? false) is same as (true) %}
+    {% set _important = (options.important ?? false) is same as (true) %}
+
+    {% set _id = options.id ?? null %}
+    {% set _attr = options.attr ?? {} %}
+    {% set _class = options.class ?? '' %}
+    {% set _raw = (options.raw ?? false) is same as (true) %}
+
+    {% if (_title is empty or _description is empty) and options.important is not defined %}
+        {% deprecated "Using important alert without setting the 'important' option is deprecated, set option to true instead." %}
+        {% set _important = true %}
+    {% endif %}
+
+    <div
+            {% if _id %}id="{{ _id }}"{% endif %}
+            class="alert alert-{{ _type }} {% if _dismissible %}alert-dismissible{% endif %} {% if _important %}alert-important{% endif %} {{ _class }}"
+            role="alert"
+            {{ utils.attr_to_html(_attr) }}
+    >
+        <div class="d-flex">
+            {% if _icon %}
+                <div class="alert-icon">
+                    {{ tabler_icon(_icon, true) }}
+                </div>
+            {% endif %}
+
+            {% if _title is not empty or _description is not empty %}
+                <div>
+                    {% if _title is not empty %}
+                        <h4 class="{% if not _important %}alert-title{% endif %} {{ _description is not empty ? 'mb-1' : 'mb-0' }}">{{ _raw ? _title|raw : _title }}</h4>
+                    {% endif %}
+                    {% if _description is not empty %}
+                        {% if _important %}
+                            <p class="m-0">{{ _raw ? _description|raw : _description }}</p>
+                        {% else %}
+                            <div class="text-body-secondary">{{ _raw ? _description|raw : _description }}</div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+
+        {% if _dismissible %}<a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>{% endif %}
+    </div>
+{% endmacro %}

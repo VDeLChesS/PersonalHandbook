@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SuggestedTasks index{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-start align-content-center">
+    <a href="{{ path('app_user_access') }}" style="margin: 5px 0 0 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-caret-left-square-fill" viewBox="0 0 16 16">
+        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm10.5 10V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4A.5.5 0 0 0 10.5 12"/></svg>
+    </a>
+</div>
+    <h1>SuggestedTasks index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Picture</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for suggested_task in suggested_tasks %}
+            <tr>
+                <td>{{ suggested_task.id }}</td>
+                <td>{{ suggested_task.title }}</td>
+                <td>{{ suggested_task.description }}</td>
+                <td>{{ suggested_task.picture }}</td>
+                <td>
+                    <a href="{{ path('suggested_tasks_show', {'id': suggested_task.id}) }}">show</a>
+                    <a href="{{ path('suggested_tasks_edit', {'id': suggested_task.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('suggested_tasks_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "@EasyAdmin/page/content.html.twig" %}
+{% block stylesheets %}
+    
+    <link rel="stylesheet" href="{{ asset('styles/admin_css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/admin_css/noscript.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/admin_css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
+{% endblock %}
+
+{% block body_javascript %}
+    
+    <script src="{{ asset('js/admin_js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/admin_js/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ asset('js/admin_js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ asset('js/admin_js/browser.min.js') }}"></script>
+    <script src="{{ asset('js/admin_js/breakpoints.min.js') }}"></script>
+    <script src="{{ asset('js/admin_js/util.js') }}"></script>
+    <script src="{{ asset('js/admin_js/main.js') }}"></script>
+
+    {% block importmap %}{{ importmap('app') }}{% endblock %}
+{% endblock %}
+
+
+{% block main %}
+<div class="d-flex justify-content-start align-content-center">
+    <a href="{{ path('home') }}" style="margin: 5px 0 0 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-caret-left-square-fill" viewBox="0 0 16 16">
+        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm10.5 10V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4A.5.5 0 0 0 10.5 12"/></svg>
+    </a>
+</div>
+    <body class="is-preload">
+        
+	    <div id="wrapper">
+            <section id="banner" class="major">
+                <div class="inner">
+                    <header class="major">
+                        <h1>Project My Notes on Coding</h1>
+                    </header>
+                    <div class="content">
+                        <p>My personal notes on web Development<br>
+                        Accessible to All</p>
+                        <ul class="actions">
+                            <li><a href="#one" class="button next scrolly">Get Started</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+    <!-- Main -->
+            <div id="main">
+                <section id="one" class="tiles">
+                    <article>
+                        <span class="image">
+                            <img src="{{ asset('pictures/pic01.jpg') }}" alt="">
+                        </span>
+                        <header class="major">
+                            <h3><a href="landing.html" class="link">Python</a></h3>
+                            <p>Python, a programming Language. Clicke here to see my Notes</p>
+                        </header>
+                    </article>
+                    <article>
+                        <span class="image">
+                            <img src="{{ asset('pictures/pic02.jpg')}}" alt="" />
+                        </span>
+                        <header class="major">
+                            <h3><a href="landing.html" class="link">HTML</a></h3>
+                            <p>Hyper Text Markup Language. Click here to see my notes</p>
+                        </header>
+                    </article>
+                    <article>
+                        <span class="image">
+                            <img src="{{ asset('pictures/pic03.jpg')}}" alt="" />
+                        </span>
+                        <header class="major">
+                            <h3><a href="landing.html" class="link">CSS</a></h3>
+                            <p>Cascading Style Sheets. Click here to see my notes</p>
+                        </header>
+                    </article>
+                    <article>
+                        <span class="image">
+                            <img src="{{ asset('pictures/pic04.jpg') }}" alt="" />
+                        </span>
+                        <header class="major">
+                            <h3><a href="landing.html" class="link">JavaScript</a></h3>
+                            <p>JavaScript is a programming language. Click here to see my notes</p>
+                        </header>
+                    </article>
+                    <article>
+                        <span class="image">
+                            <img src="{{ asset('pictures/pic05.jpg') }}" alt="" />
+                        </span>
+                        <header class="major">
+                            <h3><a href="landing.html" class="link">Bootstrap</a></h3>
+                            <p>Bootstrap, an open-source CSS framework for Web Development. Click here to see my notes</p>
+                        </header>
+                    </article>
+                    <article>
+                        <span class="image">
+                            <img src="{{ asset('pictures/pic06.jpg') }}" alt="" />
+                        </span>
+                        <header class="major">
+                            <h3><a href="landing.html" class="link">React.js</a></h3>
+                            <p>React is a JavaScript library for building user interfaces. Click here to see my notes</p>
+                        </header>
+                    </article>
+                </section>
+
+                <!-- Two -->
+                <section id="two">
+                    <div class="inner">
+                        <header class="major">
+                            <h2>Massa libero</h2>
+                        </header>
+                        <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet pharetra et feugiat tempus.</p>
+                        <ul class="actions">
+                            <li><a href="landing.html" class="button next">Get Started</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </body>
+{% endblock main %}
+
+{% block footer %}
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                <li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+            </ul>
+        </div>
+    </footer>
+{% endblock footer %}

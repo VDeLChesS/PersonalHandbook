@@ -1,0 +1,48 @@
+{{ form_start(form) }}
+    
+    
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.title) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.category) }}
+                {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.category) }}
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.picture) }}
+                {{ form_widget(form.picture, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.picture) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.subcategory) }}
+                {{ form_widget(form.subcategory, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.subcategory) }}
+                <!-- Add your code here -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'style': 'height: 20rem;'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+        </div>
+    </div>  
+    <button class="button" style="vertical-align:middle"><span>{{ button_label|default('Create') }}</span></button>
+{{ form_end(form) }}
+<!-- Path: templates/my_notes/_delete_form.html.twig -->

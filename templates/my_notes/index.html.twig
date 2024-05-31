@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MyNotes index{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/mynotes.css') }}">
+    <style>
+        body {
+            min-height: 75rem;
+            padding-top: 4.5rem;
+        }
+        
+        {% for my_note in my_notes %}
+            {% set note_color = '' %}
+            {% if my_note.category %}
+                {% set note_color = my_note.category.name %}
+            {% endif %}
+            {% set card_color = '' %}
+            {% if note_color == "Personal" %}
+                {% set card_color = "rgba(255, 193, 7, 0.3)" %}
+            {% elseif note_color == "Work" %}
+                {% set card_color = "rgba(40, 167, 69, 0.3)" %}
+            {% elseif note_color == "School" %}
+                {% set card_color = "rgba(23, 162, 184, 0.3)" %}
+            {% elseif note_color == "Family" %}
+                {% set card_color = "rgba(220, 53, 69, 0.3)" %}
+            {% elseif note_color == "Friends" %}
+                {% set card_color = "rgba(108, 117, 125, 0.3)" %}
+            {% elseif note_color == "Health" %}
+                {% set card_color = "rgba(220, 60, 2, 0.3)" %}
+            {% elseif note_color == "Finance" %}
+                {% set card_color = "rgba(0, 123, 255, 0.3)" %}
+            {% elseif note_color == "Hobbies" %}
+                {% set card_color = "rgba(108, 117, 125, 0.3)" %}
+            {% elseif note_color == "Travel" %}
+                {% set card_color = "rgba(222, 212, 24, 0.3)" %}
+            {% elseif note_color == "Food" %}
+                {% set card_color = "rgba(252, 192, 70, 0.3)" %}
+            {% elseif note_color == "Sports" %}
+                {% set card_color = "rgba(40, 167, 69, 0.3)" %}
+            {% elseif note_color == "Entertainment" %}
+                {% set card_color = "rgba(23, 162, 184, 0.3)" %}
+            {% elseif note_color == "Technology" %}
+                {% set card_color = "rgba(220, 53, 69, 0.3)" %}
+            {% elseif note_color == "Shopping" %}
+                {% set card_color = "rgba(342, 160, 170, 0.5)" %}
+            {% elseif note_color == "Others" %}
+                {% set card_color = "rgba(108, 117, 125, 0.3)" %}
+            {% endif %}
+            #note_card{{ my_note.id }} {
+                background-color: {{ card_color }};
+                margin: 5px;
+            }
+        {% endfor %}
+        {% for category in categories %}
+        {% set category_color = '' %}
+            {% if category.name %}
+                {% set category_color = category.name %}
+            {% endif %}
+            {% set category_color = '' %}
+            {% if category.name == "Personal" %}
+                {% set category_color = "rgba(255, 193, 700, 0.3)" %}
+            {% elseif category.name == "Work" %}
+                {% set category_color = "rgba(40, 167, 69, 0.3)" %}
+            {% elseif category.name == "School" %}
+                {% set category_color = "rgba(23, 162, 184, 0.3)" %}
+            {% elseif category.name == "Family" %}
+                {% set category_color = "rgba(220, 53, 69, 0.3)" %}
+            {% elseif category.name == "Friends" %}
+                {% set category_color = "rgba(108, 117, 125, 0.3)" %}
+            {% elseif category.name == "Health" %}
+                {% set category_color = "rgba(220, 60, 2, 0.3)" %}
+            {% elseif category.name == "Finance" %}
+                {% set category_color = "rgba(0, 123, 255, 0.3)" %}
+            {% elseif category.name == "Hobbies" %}
+                {% set category_color = "rgba(108, 117, 12, 0.3)" %}
+            {% elseif category.name == "Travel" %}
+                {% set category_color = "rgba(222, 212, 24, 0.3)" %}
+            {% elseif category.name == "Fitness" %}
+                {% set category_color = "rgba(1606, 123, 25, 0.3)" %}
+            {% elseif category.name == "Food" %}
+                {% set category_color = "rgba(252, 192, 70, 0.3)" %}
+            {% elseif category.name == "Sports" %}
+                {% set category_color = "rgba(40, 167, 69, 0.3)" %}
+            {% elseif category.name == "Entertainment" %}
+                {% set category_color = "rgba(23, 162, 184, 0.3)" %}
+            {% elseif category.name == "Technology" %}
+                {% set category_color = "rgba(220, 53, 69, 0.3)" %}
+            {% elseif category.name == "Shopping" %}
+                {% set category_color = "rgba(342, 160, 170, 0.5)" %}
+            {% elseif category.name == "Others" %}
+                {% set category_color = "rgba(108, 117, 125, 0.3)" %}
+            {% endif %}
+            #category_bg_color{{category.name}} {
+                background-color: {{ category_color }};
+                margin: 5px;
+            }
+        {% endfor %}
+    </style>
+    {{ parent() }}
+
+{% endblock %}
+    
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<body>
+    <div class="row g-0 d-flex justify-content-between">
+        <div class="col-md-2">
+            <a href="{{ path('app_user_access') }}" style="margin: 5px 0 0 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-caret-left-square-fill" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm10.5 10V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4A.5.5 0 0 0 10.5 12"/></svg>
+            </a>
+        </div>
+        <div class="col-md-8">
+            <h3 class="fw-bold">Notes from User: {{ app.user.fname }} {{ app.user.lname }}</h3>
+        </div>
+        <div class="col-md-2">
+            <a href="{{ path('my_notes_new') }}"><button class="btn btn-outline-light">Add Note</button></a>
+        </div>
+    </div>
+    <main class="h-100 flex-shrink-0">
+        <div class="container-fluid text-center">
+            <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+            {% for category in categories %}
+                <div class="col" id="category_bg_color{{category.name}}">
+                    <div class="p-3"><a href="{{ path('my_notes_index', {'category': category.id}) }}"><button class="btn btn-outline-primary">{{ category.name }}</button></a></div>
+                </div>
+            {% endfor %}
+            
+        
+        <div class="container-fluid"> 
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                {% for my_note in my_notes %}
+                    <div class="col">
+                        <div class="card" id="note_card{{ my_note.id }}">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h5 class="card-title">{{ my_note.title }} </h5>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                            <span>See my Note</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <span>from: </span><span class="card-text fw-bold">  {{ my_note.createdAt ? my_note.createdAt|date('Y-m-d') : '' }}</span>
+                                <span>at: </span><span class="card-text fw-bold">  {{ my_note.createdAt ? my_note.createdAt|date('H:i') : '' }}</span>
+                            </div> 
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>   <!-- Modal -->
+            {% for my_note in my_notes %}
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: black;">{{ my_note.title }}</h1>
+                                
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p id="mynote_category">Category: {{ my_note.category ? my_note.category.name : '' }}</p>
+                                <p id="mynote_description">{{ my_note.description }}</p>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="{{ path('my_notes_show', {'id': my_note.id}) }}"><button class="btn btn-outline-primary" id="show_button" role="button">Show</a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="{{ path('my_notes_edit', {'id': my_note.id}) }}"><button class="btn btn-outline-warning" id="edit_button" role="button">Edit</button></a>
+                                    </div>
+                                    <div class="col">
+                                        {{ include('my_notes/_delete_form.html.twig') }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>  
+            {% endfor %} 
+            </div>
+        </div>
+    </main>
+</body>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
+

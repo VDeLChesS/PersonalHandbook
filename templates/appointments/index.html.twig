@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Appointments index{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- Add the evo-calendar.css for styling -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.orange-coral.min.css"/>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<body>
+    <div class="d-flex justify-content-start align-content-center">
+        <a href="{{ path('app_user_access') }}" style="margin: 5px 0 0 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-caret-left-square-fill" viewBox="0 0 16 16">
+            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm10.5 10V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4A.5.5 0 0 0 10.5 12"/></svg>
+        </a>
+    </div>
+    <div class="d-flex justify-content-around">
+        <h3 class="text-center"> Hi {{ app.user.fname }} {{ app.user.lname }}! Here you can get a look at your Appointments</h3>
+    </div>
+    <main class="h-100 flex-shrink-0 text-center">
+        <div class="container-fluid">
+            <a href="{{ path('appointments_new') }}" class='btn btn-outline-light h-50'>Create new</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Appointment</th>
+                        <th>Category</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Start_time</th>
+                        <th>End_time</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment.title }}</td>
+                        <td>{{ appointment.category ? appointment.category.name : '' }}</td>
+                        <td>{{ appointment.location }}</td>
+                        <td>{{ appointment.date ? appointment.date|date('Y-m-d') : '' }}</td>
+                        <td>{{ appointment.startTime ? appointment.startTime|date('H:i') : '' }}</td>
+                        <td>{{ appointment.endTime ? appointment.endTime|date('H:i') : '' }}</td>
+                        <td>
+                            <a href="{{ path('appointments_show', {'id': appointment.id}) }}">show</a>
+                            <a href="{{ path('appointments_edit', {'id': appointment.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div id="calendar"></div>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+        <!-- Add the evo-calendar.js for.. obviously, functionality! -->
+    <script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/js/evo-calendar.min.js"></script>
+    <script>
+            // initialize your calendar, once the page's DOM is ready
+        $(document).ready(function() {
+            $('#calendar').evoCalendar({
+                theme: 'Orange Coral',
+                settingName: 'Calendar',
+                format: 'yyyy-mm-dd',
+                titleFormat: 'MM yyyy',
+                eventHeaderFormat: 'MM d, yyyy',
+                firstDayOfWeek: 0,
+                language: 'en',
+                todayHighlight: true,
+                sidebarToggler: true,
+                sidebarDisplayDefault: true,
+                eventDisplayDefault: true,
+                eventListToggler: true,
+                calendarEvents: [
+                    {% for appointment in appointments %}
+                        {
+                            id: '{{ appointment.id }}',
+                            name: '{{ appointment.title }}',
+                            category: '{{ appointment.category ? appointment.category.name : '' }}',
+                            location: '{{ appointment.location }}',
+                            description: '{{ appointment.description }}',
+                            date: '{{ appointment.date|date('Y-m-d') }}',
+                            startTime: '{{ appointment.startTime|date('H:i') }}',
+                            endTime: '{{ appointment.endTime|date('H:i') }}',
+                            type: 'event',
+                            everyYear: false
+                        },
+                    {% endfor %}
+                ],
+                addCalendarEvent(calendarEvent) {
+                    console.log('addCalendarEvent', calendarEvent);
+                },
+                updateCalendarEvent(calendarEvent, newCalendarEvent) {
+                    console.log('updateCalendarEvent', calendarEvent, newCalendarEvent);
+                },
+                deleteCalendarEvent(calendarEvent) {
+                    console.log('deleteCalendarEvent', calendarEvent);
+                },
+                selectDate(date, events) {
+                    console.log('selectDate', date, events);
+                },
+                onEventClick(event) {
+                    console.log('onEventClick', event);
+                },
+                onEventMouseover(event) {
+                    console.log('onEventMouseover', event);
+                }
+            })
+        })
+    </script>
+</body>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+

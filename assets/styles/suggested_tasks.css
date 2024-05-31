@@ -1,0 +1,22 @@
+#show_picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+p {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+a {
+    margin: 5px;
+    padding: 5px;
+
+}

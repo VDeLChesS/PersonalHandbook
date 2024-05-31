@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Addresses index{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('styles/user_access.css') }}" rel="stylesheet">
+    {{ parent() }}
+{% endblock %}
+
+{% block navbar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-start align-content-center">
+        <a href="{{ path('app_user_access') }}" style="margin: 5px 0 0 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-caret-left-square-fill" viewBox="0 0 16 16">
+            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm10.5 10V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4A.5.5 0 0 0 10.5 12"/></svg>
+        </a>
+    </div>
+    <div class="container py-3">
+        <div class="row d-flex justify-content-around">
+            <div class"col">
+                {% if addresses|length > 0 %}
+                    <h1 class="text-center"> {{ app.user.fname }} {{ app.user.lname }}'s Address </h1>
+                {% else %}
+                    <h1 class="text-center">No Addresses found</h1>
+                {% endif %}
+            </div>
+            <div class="col">
+                <a href="{{ path('app_addresses_new') }}">Create new</a>
+            </div>
+
+        </div>
+       
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>Zip</th>
+                    <th>Country</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for address in addresses %}
+                <tr>
+                    <td>{{ address.street }}</td>
+                    
+                    <td>{{ address.city }}</td>
+                    <td>{{ address.zip }}</td>
+                    <td>{{ address.country }}</td>
+                    <td>
+                        <a href="{{ path('app_addresses_show', {'id': address.id}) }}" class="btn btn-outline-info">show</a>
+                        <a href="{{ path('app_addresses_edit', {'id': address.id}) }}" class="btn btn-outline-warning">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <div class="mb-3" id="map"></div>
+            <input type="text" class="w-50" id="address" placeholder="Enter address or city name">
+            <input type="button" class="btn btn-success" value="Add" onclick="getLocation()">
+            <input type="button" class="btn btn-warning" value="Hide" onclick="hidePins()">
+            <input type="button" class="btn btn-primary" value="Show" onclick="showPins()">
+            <input type="button" class="btn btn-danger" value="Delete all" onclick="deletePins()">
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        let geocoder;
+        let markers = [];
+        function initMap() {
+            geocoder = new google.maps.Geocoder();
+            var mlocation = {
+                lat: 48.20849,
+                lng: 16.37208
+            };
+            var nlocation = {
+                lat: 48.20849,
+                lng: 15.37208
+            };
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: mlocation,
+                zoom: 8
+            });
+        }
+        function getLocation() {
+            let address = document.getElementById('address').value;
+            geocoder.geocode({
+                'address': address
+                }, function(results, status) {
+                if (status == 'OK') {
+                    map.setCenter(results[0].geometry.location);
+                    let marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                    markers.push(marker);
+                    console.log(markers);
+                } else {
+                    console.table(results);
+                    alert('It was not possible to perform your request due to ' + status);
+                }
+            })
+        };
+        function setMapOnAll(map) {
+            for (let i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+        function clearMarkers() {
+            setMapOnAll(null);
+        }
+        function hidePins() {
+            clearMarkers();
+        };
+        function showPins() {
+            setMapOnAll(map);
+        };
+        function deletePins() {
+            hidePins();
+            markers = [];
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtjaD-saUZQ47PbxigOg25cvuO6_SuX3M&callback=initMap" async defer></script>
+    
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

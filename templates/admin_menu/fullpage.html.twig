@@ -1,0 +1,28 @@
+<!doctype html{% block html_start %}{% endblock %}>
+<html lang="{{ app.request.locale }}"{% if tabler_bundle.isRightToLeft() %} dir="rtl"{% endif %}>
+<head>
+    {% block head %}
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    {% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+    {% block stylesheets %}
+        {% if tabler_bundle.isRightToLeft() %}
+            <link rel="stylesheet" href="{{ asset('bundles/tabler/tabler-rtl.css') }}?{{ tabler_asset_version() }}">
+        {% else %}
+            <link rel="stylesheet" href="{{ asset('bundles/tabler/tabler.css') }}?{{ tabler_asset_version() }}">
+        {% endif %}
+    {% endblock %}
+</head>
+<body{% block body_start %}{% endblock %} class="d-flex flex-column {{ 'border-top-wide border-primary theme-light'|tabler_body }} {% block body_class %}{% endblock %}" data-bs-theme="{{ tabler_theme() }}">
+{% block after_body_start %}{% endblock %}
+
+<div class="{% block page_classes %}page page-center{% endblock %}">
+    {% block page_content %}{% endblock %}
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/tabler/tabler.js') }}?{{ tabler_asset_version() }}"></script>
+{% endblock %}
+</body>
+</html>

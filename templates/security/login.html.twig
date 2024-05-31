@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block header %}{% endblock %}
+{% block footer %} {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/login.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+<body class="text-center">
+    <main class="form-signin w-100 m-auto">
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+            <img class="mb-4" src="{{ asset('favicon/android-chrome-512x512.png') }}" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 font-weight-normal" id="login-header">Log In To Your Account</h1>
+            <div class="form-floating">
+                <input type="email" name="email" id="floatingInput" placeholder="email-name@example.com" class="form-control" required>
+                <label for="floatingInput">Email</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" name="password" id="floatingPassword" placeholder="Password" class="form-control" autocomplete="current-password" required>
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">   
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me" checked/> Remember me
+                        </label>
+                    </div>
+                    <input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}"/>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-outline-primary" type="submit" id="login_button">Sign in</button>
+                </div>
+            </div>
+            <hr class="my-4">
+            
+        </form>
+        <div class="row">
+            
+            <div class="col-sm-8">
+                Don't have an Account yet ?
+            </div>
+            <div class="col-sm-4">
+                <a href="{{ path('app_register') }}" class="btn btn-outline-success" id="signup_button">Sign Up</a>
+            </div>
+        </div>
+    </main>
+</body>
+{% endblock %}

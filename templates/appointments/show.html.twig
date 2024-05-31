@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Appointments{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('styles/appointments.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-start align-content-center">
+    <a href="{{ path('appointments_index') }}" style="margin: 5px 0 0 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-caret-left-square-fill" viewBox="0 0 16 16">
+        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm10.5 10V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4A.5.5 0 0 0 10.5 12"/></svg>
+    </a>
+</div>
+    
+    <div class="d-flex container-fluid justify-content-center">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">{{ appointment.title }}</h3><span class="text-center">Category: </span><h5 class="card-title fw-bold" style="color: rgba(100,100,500,1)">{{ appointment.category ? appointment.category.name : '' }}</h5>
+            </div>
+            <div class="card-body">
+                <span class="fw-bold">Where?</span><h4 class="card-title fw-bold" style="color: rgba(100,100,500,1)">{{ appointment.location }}</h4> 
+                <span class="fw-bold">When?</span><h4 class="card-title fw-bold" style="color: rgba(100,100,500,1)">{{ appointment.date ? appointment.date|date('d-m-Y') : '' }}<span class="fw-bold" style="color: rgba(255, 255, 255); font-size: 0.75em;"> from </span>{{ appointment.startTime ? appointment.startTime|date('H:i') : '' }}<span class="fw-bold" style="color: rgba(255, 255, 255); font-size: 0.75em;"> to </span>{{ appointment.endTime ? appointment.endTime|date('H:i') : '' }}</h4>
+                <span class="fw-bold" style="color: rgba(255, 255, 255); font-size: 0.75em;">Infos/Details:</span> <p class="fw-bold" style="color: rgba(100,100,500,1)">{{ appointment.description }}</p>
+                <div class="d-flex justify-content-evenly">
+                    <div class="col-md-2">
+                        {{ include('appointments/_delete_form.html.twig') }}
+                    </div>
+                    <div class="col-md-2">
+                        <a href="{{ path('appointments_edit', {'id': appointment.id}) }}"><button class="button-64" role="button" type="button">Edit</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-body-secondary">
+                <small style="color: rgba(252, 252, 252, 1)">Created at: {{ appointment.createdAt ? appointment.createdAt|date('Y-m-d H:i') : '' }}</small>
+            </div>
+        </div>
+    </div>
+    <br>
+
+
+    
+{% endblock %}

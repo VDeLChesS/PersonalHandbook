@@ -1,0 +1,27 @@
+{% macro status(text, options) %}
+    {% import '@Tabler/includes/utils.html.twig' as utils %}
+    {% from '@Tabler/components/status_dot.html.twig' import status_dot %}
+
+    {% set _color = options.color ?? 'green' %}
+    {% set _animated = (options.animated ?? true) is same as true %}
+    {% set _lite = (options.lite ?? false) is same as true %}
+    {% if options.with_dot is defined %}
+        {% deprecated 'with_dot option is deprecated, use withDot option instead!' %}
+        {% set _withDot = options.with_dot is same as true %}
+    {% else %}
+        {% set _withDot = (options.withDot ?? false) is same as true %}
+    {% endif %}
+
+    {% set _extraClass = options.extraClass ?? '' %}
+    {% set _attr = options.attr ?? {} %}
+
+    <span
+        class="status status-{{ _color }} {% if _lite %}status-lite{% endif %} {{ _extraClass }}"
+        {{ utils.attr_to_html(_attr) }}
+    >
+        {% if _withDot %}
+            {{ status_dot({color: _color, animated : _animated}) }}
+        {% endif %}
+        {{ text }}
+    </span>
+{% endmacro %}

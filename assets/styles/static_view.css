@@ -1,0 +1,88 @@
+.container {
+    max-width: 960px;
+}
+
+.content {
+    background-color: rgb(78, 123, 192);
+
+}
+
+/*
+   * Extra utilities
+   */
+
+.flex-equal>* {
+    flex: 1;
+}
+
+@media (min-width: 768px) {
+    .flex-md-equal>* {
+        flex: 1;
+    }
+}
+
+/* main header part */
+.button-24 {
+    background: #FF4742;
+    border: 1px solid #FF4742;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+.button-24:hover,
+.button-24:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #FF4742;
+}
+
+.button-24:active {
+    opacity: .5;
+}
+
+
+#task-org_pic_static {
+    background-image: url("https://pariscorp.com/wp-content/uploads/2019/10/get-organized-checklist.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: absolute;
+    right: 75%;
+    bottom: -30%;
+    width: 400px;
+    height: 580px;
+    border-radius: 21px;
+    transform: rotate(20deg);
+}
+
+#task-org_pic2_static {
+    background-image: url("https://www.dragapp.com/wp-content/uploads/2020/07/meister-2.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: absolute;
+    right: 5%;
+    bottom: -30%;
+    width: 400px;
+    height: 580px;
+    border-radius: 21px;
+    transform: rotate(10deg);
+}

@@ -1,3 +1,32 @@
 body {
-    background-color: skyblue;
+    font-family: 'Nunito', sans-serif;
+    background: rgb(25, 4, 0);
+    background: linear-gradient(90deg, rgba(25, 4, 0, 1) 1%, rgba(25, 25, 35, 1) 11%, rgba(25, 36, 53, 1) 28%, rgba(59, 68, 118, 1) 41%, rgba(35, 61, 100, 1) 71%, rgba(25, 36, 53, 1) 90%);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #ffff;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+#base_footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #094942;
+    color: white;
+    padding: 10px;
+}
+
+#login_button {
+    margin-right: 20px;
+}
+
+#logout_button {
+    margin-right: 20px;
+}
+
+#register_button {
+    margin-right: 20px;
 }

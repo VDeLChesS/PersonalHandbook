@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Addresses{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-start align-content-center">
+    <a href="{{ path('app_addresses_index') }}" style="margin: 5px 0 0 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-caret-left-square-fill" viewBox="0 0 16 16">
+        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm10.5 10V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4A.5.5 0 0 0 10.5 12"/></svg>
+    </a>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <h1 class="text-center">Addresses</h1>
+    </div>
+    <div class="col-md-2">   
+        <a href="{{ path('app_addresses_edit', {'id': address.id}) }}" class="btn btn-outline-warning">EDIT ADDRESS</a>
+    </div>
+</div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ address.id }}</td>
+            </tr>
+            <tr>
+                <th>Street</th>
+                <td>{{ address.street }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ address.city }}</td>
+            </tr>
+            <tr>
+                <th>Zip</th>
+                <td>{{ address.zip }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ address.country }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <br>
+    {{ include('user_access/addresses/_delete_form.html.twig') }}
+{% endblock %}
